@@ -3,11 +3,16 @@
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <input [(ngModel)]="boardDim" type="text" placeholder="enter board dimention" required>
+  <input [(ngModel)]="colorsNumber" type="text"  placeholder=" enter colors number" required>
+  <button (click)="initBoardHandler()">Initialize Board</button>
+  <button (click)="solveHandler()">Solve</button>
   <div class="colorsPanel">
     <div class="colorElem" *ngFor="let color of colorsPanel" (click)="colorElemHandler(color)" [ngStyle]="setColorDivBackground(color)">
-      click
+      pick
     </div>
   </div>
-  
-  <app-board></app-board>
+  <div *ngFor="let board of gameBoards">
+    <app-board [gameBoard]="board"></app-board>
+  </div>
 </div>
