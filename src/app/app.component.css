@@ -1,0 +1,13 @@
+.colorsPanel{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 48px;
+}
+.colorElem{
+  padding: 16px;
+  border: 1px solid #000;
+}
+.colorElem:hover{
+  cursor: pointer;
+}
