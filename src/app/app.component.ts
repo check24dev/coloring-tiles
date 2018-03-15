@@ -7,7 +7,7 @@ import Board from './gameEngine/game-board';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Enjoy the Game';
   boardsArray = [];
   colorsPanel = [];
   colorsNumber = 4;

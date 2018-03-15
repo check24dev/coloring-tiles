@@ -11,3 +11,13 @@
 .colorElem:hover{
   cursor: pointer;
 }
+.boards{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center
+}
+.boardContainer{
+  margin: 24px;
+}

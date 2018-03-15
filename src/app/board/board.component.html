@@ -1,4 +1,4 @@
-<div class="boardContainer" *ngIf="gameBoard">
+<div class="board" *ngIf="gameBoard">
   <div class="boardRow" *ngFor="let tiles of gameBoard.board">
     <div class="boardRow_elem" *ngFor="let tile of tiles">
       <app-tile [tile]="tile"></app-tile>
