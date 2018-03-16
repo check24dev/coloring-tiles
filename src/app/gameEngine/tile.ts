@@ -6,6 +6,7 @@ export default class Tile {
   west: Tile;
   xCor: number;
   yCor: number;
+  visited: boolean;
   constructor(color: string) {
     this.color = color;
     this.north = null;
@@ -14,6 +15,7 @@ export default class Tile {
     this.west = null;
     this.xCor = 0;
     this.yCor = 0;
+    this.visited = false;
   }
   public printTile(): void {
     console.log(this.color);

@@ -19,9 +19,9 @@ export default class GameBoard {
  initBoard(): void {
    for (let i = 0; i < this.boardDim; i++) {
      for (let j = 0; j < this.boardDim; j++) {
-       let randomColor = Math.floor((Math.random() * this.colorsNumber) + 1);
-       let tileColor = colorArray[randomColor];
-       let tempTile = new Tile(tileColor);
+       const randomColor = Math.floor((Math.random() * this.colorsNumber) + 1);
+       const tileColor = colorArray[randomColor];
+       const tempTile = new Tile(tileColor);
        tempTile.xCor = i;
        tempTile.yCor = j;
        this.board[i][j] = tempTile;
@@ -90,13 +90,31 @@ export default class GameBoard {
      }
    }
  }
- printBoard() {
-   for (let i = 0; i < this.boardDim; i++) {
-     for (let j = 0; j < this.boardDim; j++) {
-       this.board[i][j].printTile();
-     }
-     console.log('------------------');
-   }
- }
 
+ setTileColorNearSource(newColor: string): void {
+   this.board[0][1].color = newColor;
+   this.board[1][0].color = newColor;
+ }
+ setTileColor(tile: Tile, newColor: string): any {
+  if (tile.xCor !== 0 || tile.yCor !== 0) {
+    tile.color = newColor;
+    tile.visited = true;
+  }
+  if (tile.east !== null) {
+    tile.east.color = newColor;
+    console.log('east', newColor);
+  }
+  if (tile.west !== null) {
+    tile.west.color = newColor;
+    console.log('west', newColor);
+  }
+  if (tile.north !== null) {
+    tile.north.color = newColor;
+    console.log('north', newColor);
+  }
+  if (tile.south !== null) {
+    tile.south.color = newColor;
+    console.log('south', newColor);
+  }
+ }
 }

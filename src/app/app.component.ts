@@ -42,11 +42,20 @@ export class AppComponent {
   }
   solveHandler(): void {
     const tempGameBoard = new Board(this.boardDim, this.colorsNumber);
-    tempGameBoard.initBoard();
-    this.currentColor = tempGameBoard.sourceTile.color;
+    for (let i = 0; i < this.boardDim; i++) {
+      for (let j = 0; j < this.boardDim; j++) {
+        tempGameBoard.board[i][j] = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j]);
+        tempGameBoard.board[i][j].west = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].west);
+        tempGameBoard.board[i][j].east = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].east);
+        tempGameBoard.board[i][j].north = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].north);
+        tempGameBoard.board[i][j].south = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].south);
+      }
+    }
+    console.log(this.gameBoards[this.gameBoards.length - 1], tempGameBoard);
+    tempGameBoard.setTileColor(tempGameBoard.board[0][2], this.colorsPanel[0]);
     this.gameBoards.push(tempGameBoard);
   }
   colorElemHandler(color: string): void {
-    console.log(color);
+    this.gameBoards[this.gameBoards.length - 1].setTileColorNearSource(color);
   }
 }
