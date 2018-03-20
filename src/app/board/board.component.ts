@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import GameBoard from '../gameEngine/game-board';
+import GameBoard from '../gameEngine/board';
 
 @Component({
   selector: 'app-board',

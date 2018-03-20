@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import colorArray from './colorsUtile';
-import Board from './gameEngine/game-board';
+import Board from './gameEngine/board';
+import { Map, List } from 'immutable';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -19,10 +21,11 @@ export class AppComponent {
     for (let i = 0; i < this.colorsNumber; i++) {
       this.colorsPanel.push(colorArray[i + 1]);
     }
-    const tempGameBoard = new Board(this.boardDim, this.colorsNumber);
-    tempGameBoard.initBoard();
-    this.currentColor = tempGameBoard.sourceTile.color;
-    this.gameBoards.push(tempGameBoard);
+    const tempBoard = new Board(this.boardDim, this.colorsNumber);
+    tempBoard.initBoard();
+    this.currentColor = tempBoard.sourceTile.color;
+    this.gameBoards.push(tempBoard);
+    // console.log(this.gameBoards[0].get('board'));
   }
   colorClickHandler(): void {
     for (let i = 0; i < this.colorsNumber; i++) {
@@ -36,26 +39,26 @@ export class AppComponent {
     return styles;
   }
   initBoardHandler(): void {
-    this.gameBoards[0] = new Board(this.boardDim, this.colorsNumber);
-    this.gameBoards[0].initBoard();
-
+    const tempBoard = new Board(this.boardDim, this.colorsNumber);
+    tempBoard.initBoard();
+    this.currentColor = tempBoard.sourceTile.color;
+    this.gameBoards[0] = tempBoard;
   }
   solveHandler(): void {
-    const tempGameBoard = new Board(this.boardDim, this.colorsNumber);
-    for (let i = 0; i < this.boardDim; i++) {
-      for (let j = 0; j < this.boardDim; j++) {
-        tempGameBoard.board[i][j] = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j]);
-        tempGameBoard.board[i][j].west = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].west);
-        tempGameBoard.board[i][j].east = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].east);
-        tempGameBoard.board[i][j].north = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].north);
-        tempGameBoard.board[i][j].south = Object.assign({}, this.gameBoards[this.gameBoards.length - 1].board[i][j].south);
-      }
-    }
-    console.log(this.gameBoards[this.gameBoards.length - 1], tempGameBoard);
-    tempGameBoard.setTileColor(tempGameBoard.board[0][2], this.colorsPanel[0]);
-    this.gameBoards.push(tempGameBoard);
+    const tempBoard = new Board(this.boardDim, this.colorsNumber);
+    tempBoard.board = this.gameBoards[this.gameBoards.length - 1].board.map((item, index) => {
+      return item.map((elem, ind) => Object.assign({}, elem));
+    });
+    tempBoard.setTileColor(tempBoard.board[0][2], this.colorsPanel[0]);
+    this.gameBoards.push(tempBoard);
   }
   colorElemHandler(color: string): void {
-    this.gameBoards[this.gameBoards.length - 1].setTileColorNearSource(color);
+    const tempBoard = new Board(this.boardDim, this.colorsNumber);
+    tempBoard.board = this.gameBoards[this.gameBoards.length - 1].board.map((item, index) => {
+      return item.map((elem, ind) => Object.assign({}, elem));
+    });
+    tempBoard.resetBoard();
+    tempBoard.setTileSourceColor(color);
+    this.gameBoards.push(tempBoard);
   }
 }
