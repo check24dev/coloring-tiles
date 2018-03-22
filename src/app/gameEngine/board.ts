@@ -42,25 +42,95 @@ export default class GameBoard {
     this.setTileColor(this.board[1][0], newColor);
   }
   setTileColor(tile: Tile, newColor: string): void {
-    const x = tile.xCor;
-    const y = tile.yCor;
-    const oldColor = tile.color;
-    console.log(tile);
-    if (this.board[x + 1][y].visited === false) {
-      this.setNeaborTileColor(this.board[x + 1][y], oldColor, newColor);
-    }
-    if (this.board[x - 1][y].visited === false) {
-      this.setNeaborTileColor(this.board[x - 1][y], oldColor, newColor);
-    }
-    if (this.board[x][y + 1].visited === false) {
-      this.setNeaborTileColor(this.board[x][y + 1], oldColor, newColor);
-    }
-    if (this.board[x][y - 1].visited === false) {
-      this.setNeaborTileColor(this.board[x][y - 1], oldColor, newColor);
-    }
-    if (x === 0 && y === 0) {
+    const i = tile.xCor;
+    const j = tile.yCor;
+    const n = this.boardDim - 1;
+    if (tile.visited === false) {
+      const oldColor = tile.color;
       tile.color = newColor;
       tile.visited = true;
+      if ((0 < i && i < n) && (0 < j && j < n)) { // 8 _ _
+        if (this.board[i][j - 1].color === oldColor) { // left
+          this.setTileColor(this.board[i][j - 1], newColor);
+        }
+        if (this.board[i - 1][j].color === oldColor) { // up
+          this.setTileColor(this.board[i - 1][j], newColor);
+        }
+        if (this.board[i][j + 1].color === oldColor) { // right
+          this.setTileColor(this.board[i][j + 1], newColor);
+        }
+        if (this.board[i + 1][j].color === oldColor) { // down
+          this.setTileColor(this.board[i + 1][j], newColor);
+        }
+      }
+      if ((0 < i && i < n) && (j === 0)) { // 1 left
+        if (this.board[i - 1][j].color === oldColor) { // up
+          this.setTileColor(this.board[i - 1][j], newColor);
+        }
+        if (this.board[i][j + 1].color === oldColor) { // right
+          this.setTileColor(this.board[i][j + 1], newColor);
+        }
+        if (this.board[i + 1][j].color === oldColor) { // down
+          this.setTileColor(this.board[i + 1][j], newColor);
+        }
+      }
+      if (( i === n) && (j === 0)) { // 2 left down
+        if (this.board[i - 1][j].color === oldColor) { // up
+          this.setTileColor(this.board[i - 1][j], newColor);
+        }
+        if (this.board[i][j + 1].color === oldColor) { // right
+          this.setTileColor(this.board[i][j + 1], newColor);
+        }
+      }
+      if ((i === 0) && (0 < j && j < n)) { // 3 up
+        if (this.board[i][j - 1].color === oldColor) { // left
+          this.setTileColor(this.board[i][j - 1], newColor);
+        }
+        if (this.board[i][j + 1].color === oldColor) { // right
+          this.setTileColor(this.board[i][j + 1], newColor);
+        }
+        if (this.board[i + 1][j].color === oldColor) { // down
+          this.setTileColor(this.board[i + 1][j], newColor);
+        }
+      }
+      if ((i === 0) && (j === n)) { // 4 up right
+        if (this.board[i][j - 1].color === oldColor) { // left
+          this.setTileColor(this.board[i][j - 1], newColor);
+        }
+        if (this.board[i + 1][j].color === oldColor) { // down
+          this.setTileColor(this.board[i + 1][j], newColor);
+        }
+      }
+      if ((0 < i && i < n) && (j === n)) { // 5 right
+        if (this.board[i][j - 1].color === oldColor) { // left
+          this.setTileColor(this.board[i][j - 1], newColor);
+        }
+        if (this.board[i - 1][j].color === oldColor) { // up
+          this.setTileColor(this.board[i - 1][j], newColor);
+        }
+        if (this.board[i + 1][j].color === oldColor) { // down
+          this.setTileColor(this.board[i + 1][j], newColor);
+        }
+      }
+      if ((i === n) && (j === n)) { // 6 right down
+        if (this.board[i][j - 1].color === oldColor) { // left
+          this.setTileColor(this.board[i][j - 1], newColor);
+        }
+        if (this.board[i - 1][j].color === oldColor) { // up
+          this.setTileColor(this.board[i - 1][j], newColor);
+        }
+      }
+      if ((i === n) && (0 < j && j < n)) { // 7 down
+        if (this.board[i][j - 1].color === oldColor) { // left
+          this.setTileColor(this.board[i][j - 1], newColor);
+        }
+        if (this.board[i - 1][j].color === oldColor) { // up
+          this.setTileColor(this.board[i - 1][j], newColor);
+        }
+        if (this.board[i][j + 1].color === oldColor) { // right
+          this.setTileColor(this.board[i][j + 1], newColor);
+        }
+      }
     }
   }
   setNeaborTileColor(tile: Tile, oldColor: string, newColor: string): void {
