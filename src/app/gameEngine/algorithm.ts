@@ -5,7 +5,6 @@ export default class Algorithm {
         this.solution = new Array<any>();
     }
     backtrackAlgo(gameBoard: GameBoard, colors: Array<string>): boolean {
-        // console.log(gameBoard);
         if (gameBoard.isFinished()) {
             return true;
         }
@@ -13,15 +12,12 @@ export default class Algorithm {
             const newGameBoard = gameBoard.copyBoard();
             newGameBoard.setTileSourceColor(colors[i]);
             if (gameBoard.isTheSame(newGameBoard) !== true) {
+                console.log('=====>>');
                 this.solution.push({ color: colors[i], board: newGameBoard });
-            } else {
-                this.solution.push({ color: colors[i], board: newGameBoard });
-                return true;
-            }
-            if (this.backtrackAlgo(newGameBoard, colors) === true) {
-                return true;
-            }
-            // this.solution.pop();
+                if (this.backtrackAlgo(newGameBoard, colors) === true) {
+                    return true;
+                }
+            } // this.solution.pop();
         }
         return false;
     }

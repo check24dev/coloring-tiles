@@ -49,7 +49,7 @@ export class AppComponent {
   solveHandler(): void {
    this.solAlgorithm.backtrackAlgo(this.gameBoards[0], this.colorsPanel);
    console.log(this.solAlgorithm.solution);
-   this.gameBoards = this.solAlgorithm.solution.map(item => item.board);
+   this.gameBoards = this.gameBoards.concat(this.solAlgorithm.solution.map(item => item.board));
   }
   colorElemHandler(color: string): void {
     const tempBoard = this.gameBoards[this.gameBoards.length - 1].copyBoard();
