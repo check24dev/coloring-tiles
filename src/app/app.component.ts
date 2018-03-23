@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import colorArray from './colorsUtile';
 import GameBoard from './gameEngine/board';
+import Algorithm from './gameEngine/algorithm';
 import { Map, List } from 'immutable';
 
 @Component({
@@ -16,6 +17,7 @@ export class AppComponent {
   gameBoards: Array<GameBoard>;
   boardDim = 4;
   currentColor: string;
+  solAlgorithm: Algorithm;
   constructor() {
     this.gameBoards = new Array<GameBoard>();
     for (let i = 0; i < this.colorsNumber; i++) {
@@ -25,7 +27,7 @@ export class AppComponent {
     tempBoard.initBoard();
     this.currentColor = tempBoard.sourceTile.color;
     this.gameBoards.push(tempBoard);
-    // console.log(this.gameBoards[0].get('board'));
+    this.solAlgorithm = new Algorithm();
   }
   colorClickHandler(): void {
     for (let i = 0; i < this.colorsNumber; i++) {
@@ -45,12 +47,9 @@ export class AppComponent {
     this.gameBoards[0] = tempBoard;
   }
   solveHandler(): void {
-    const tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
-    tempBoard.board = this.gameBoards[this.gameBoards.length - 1].board.map((item, index) => {
-      return item.map((elem, ind) => Object.assign({}, elem));
-    });
-    tempBoard.setTileColor(tempBoard.board[0][2], this.colorsPanel[0]);
-    this.gameBoards.push(tempBoard);
+   this.solAlgorithm.backtrackAlgo(this.gameBoards[0], this.colorsPanel);
+   console.log(this.solAlgorithm.solution);
+   this.gameBoards = this.solAlgorithm.solution.map(item => item.board);
   }
   colorElemHandler(color: string): void {
     const tempBoard = this.gameBoards[this.gameBoards.length - 1].copyBoard();
