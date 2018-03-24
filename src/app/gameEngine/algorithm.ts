@@ -12,7 +12,6 @@ export default class Algorithm {
             const newGameBoard = gameBoard.copyBoard();
             newGameBoard.setTileSourceColor(colors[i]);
             if (gameBoard.isTheSame(newGameBoard) !== true) {
-                console.log('=====>>');
                 this.solution.push({ color: colors[i], board: newGameBoard });
                 if (this.backtrackAlgo(newGameBoard, colors) === true) {
                     return true;

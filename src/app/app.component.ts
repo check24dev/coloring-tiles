@@ -20,9 +20,7 @@ export class AppComponent {
   solAlgorithm: Algorithm;
   constructor() {
     this.gameBoards = new Array<GameBoard>();
-    for (let i = 0; i < this.colorsNumber; i++) {
-      this.colorsPanel.push(colorArray[i + 1]);
-    }
+    this.colorClickHandler();
     const tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
     tempBoard.initBoard();
     this.currentColor = tempBoard.sourceTile.color;
@@ -41,10 +39,14 @@ export class AppComponent {
     return styles;
   }
   initBoardHandler(): void {
+    this.gameBoards = new Array<GameBoard>();
+    this.solAlgorithm = new Algorithm();
     const tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
     tempBoard.initBoard();
     this.currentColor = tempBoard.sourceTile.color;
     this.gameBoards[0] = tempBoard;
+    this.colorsPanel = [];
+    this.colorClickHandler();
   }
   solveHandler(): void {
    this.solAlgorithm.backtrackAlgo(this.gameBoards[0], this.colorsPanel);
