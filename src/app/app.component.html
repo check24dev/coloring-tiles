@@ -8,7 +8,7 @@
   <button (click)="solveHandler()">Solve</button>
   <div class="colorsPanel">
     <div class="colorElem" *ngFor="let color of colorsPanel" (click)="colorElemHandler(color)" [ngStyle]="setColorDivBackground(color)">
-      pick
+      {{color}}
     </div>
   </div>
   <div class="boards">
