@@ -40,9 +40,7 @@ export default class GameBoard {
   }
   setTileSourceColor(newColor: string): void {
     this.resetBoard();
-    // this.board[0][0].color = newColor;
     this.setTileColor(this.board[0][0], newColor);
-    // this.setTileColor(this.board[1][0], newColor);
   }
   setTileColor(tile: Tile, newColor: string): void {
     const i = tile.xCor;
