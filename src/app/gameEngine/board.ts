@@ -243,8 +243,8 @@ export default class GameBoard {
   }
   isFinished(): boolean {
     const sColor = this.board[0][0].color;
-    for (let i = 1; i < this.boardDim; i++) {
-      for (let j = 1; j < this.boardDim; j++) {
+    for (let i = 0; i < this.boardDim; i++) {
+      for (let j = 0; j < this.boardDim; j++) {
         if (this.board[i][j].color !== sColor) {
           return false;
         }

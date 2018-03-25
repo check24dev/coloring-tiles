@@ -16,8 +16,11 @@ export default class Algorithm {
                 if (this.backtrackAlgo(newGameBoard, colors) === true) {
                     return true;
                 }
-            } // this.solution.pop();
+            }
         }
         return false;
+    }
+    AstarAlgo(gameBoard: GameBoard, colors: Array<string>): void {
+        
     }
 }
