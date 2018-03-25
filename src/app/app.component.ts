@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import colorArray from './colorsUtile';
 import GameBoard from './gameEngine/board';
 import Algorithm from './gameEngine/algorithm';
-import { Map, List } from 'immutable';
 
 @Component({
   selector: 'app-root',
@@ -14,18 +13,19 @@ export class AppComponent {
   boardsArray = [];
   colorsPanel = [];
   colorsNumber = 4;
-  gameBoards: Array<GameBoard>;
+  gameBoards: any;
   boardDim = 4;
   currentColor: string;
   solAlgorithm: Algorithm;
   constructor() {
-    this.gameBoards = new Array<GameBoard>();
+    // this.gameBoards = new Array<GameBoard>();
+    
     this.colorClickHandler();
     const tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
     tempBoard.initBoard();
     this.currentColor = tempBoard.sourceTile.color;
-    this.gameBoards.push(tempBoard);
     this.solAlgorithm = new Algorithm();
+    this.gameBoards = { startPoint: tempBoard, aStar: [], backTrack: [], humanMoves: [] };
   }
   colorClickHandler(): void {
     for (let i = 0; i < this.colorsNumber; i++) {
@@ -39,24 +39,33 @@ export class AppComponent {
     return styles;
   }
   initBoardHandler(): void {
-    this.gameBoards = new Array<GameBoard>();
+    this.gameBoards.aStar = new Array<GameBoard>();
+    this.gameBoards.backTrack = new Array<GameBoard>();
+    this.gameBoards.humanMoves = new Array<GameBoard>();
     this.solAlgorithm = new Algorithm();
     const tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
     tempBoard.initBoard();
     this.currentColor = tempBoard.sourceTile.color;
-    this.gameBoards[0] = tempBoard;
+    this.gameBoards.startPoint = tempBoard;
     this.colorsPanel = [];
     this.colorClickHandler();
   }
-  solveHandler(): void {
-   this.solAlgorithm.backtrackAlgo(this.gameBoards[0], this.colorsPanel);
-   console.log(this.solAlgorithm.solution);
-   this.gameBoards = this.gameBoards.concat(this.solAlgorithm.solution.map(item => item.board));
+  solveAStarHandler(): void {
+    let someVar = this.solAlgorithm.AstarAlgo(this.gameBoards.startPoint, this.colorsPanel);
+    this.gameBoards.aStar = someVar;
+  }
+  solveBackTrackHandler(): void {
+    this.solAlgorithm.backtrackAlgo(this.gameBoards.startPoint, this.colorsPanel);
+    this.gameBoards.backTrack = this.solAlgorithm.solution.map(item => item.board);
   }
   colorElemHandler(color: string): void {
-    const tempBoard = this.gameBoards[this.gameBoards.length - 1].copyBoard();
+    let tempBoard = null;
+    if(this.gameBoards.humanMoves.length === 0) {
+      tempBoard = this.gameBoards.startPoint.copyBoard();
+    } else {
+      tempBoard = this.gameBoards.humanMoves[this.gameBoards.humanMoves.length - 1].copyBoard();
+    }
     tempBoard.setTileSourceColor(color);
-    console.log(this.gameBoards[this.gameBoards.length - 1].isTheSame(tempBoard) );
-    this.gameBoards.push(tempBoard);
+    this.gameBoards.humanMoves.push(tempBoard);
   }
 }
