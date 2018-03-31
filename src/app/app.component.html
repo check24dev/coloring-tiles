@@ -3,7 +3,7 @@
     {{ title }}
   </h1>
   <input [(ngModel)]="boardDim" type="text" placeholder="enter board dimention" required>
-  <input [(ngModel)]="colorsNumber" type="text"  placeholder=" enter colors number" required>
+  <input [(ngModel)]="colorsNumber" type="text" placeholder=" enter colors number" required>
   <button (click)="initBoardHandler()">Initialize Board</button>
   <button (click)="solveAStarHandler()">Solve Astar</button>
   <button (click)="solveBackTrackHandler()">Solve Backtarck</button>
@@ -12,17 +12,20 @@
       {{color}}
     </div>
   </div>
-  
+
   <div class="boards">
     <app-board class="boardContainer" [gameBoard]="gameBoards.startPoint"></app-board>
   </div>
   <div class="boards">
+    <div class="full"> human solution</div>
     <app-board class="boardContainer" *ngFor="let board of gameBoards.humanMoves " [gameBoard]="board"></app-board>
   </div>
   <div class="boards">
+    <div class="full"> Astar</div>
     <app-board class="boardContainer" *ngFor="let board of gameBoards.aStar " [gameBoard]="board"></app-board>
   </div>
   <div class="boards">
+    <div class="full"> backTrack</div>
     <app-board class="boardContainer" *ngFor="let board of gameBoards.backTrack" [gameBoard]="board"></app-board>
   </div>
 </div>
