@@ -1,7 +1,7 @@
 <div class="board" *ngIf="gameBoard">
-  <div class="boardRow" *ngFor="let tiles of gameBoard.board">
+  <div class="boardRow" *ngFor="let tiles of gameBoard.tiles">
     <div class="boardRow_elem" *ngFor="let tile of tiles">
-      <app-tile [tile]="tile"></app-tile>
+      <app-tile [tile]="tile" [isSourceTile]="isSourceTile(tile)"></app-tile>
     </div>
   </div>
 </div>

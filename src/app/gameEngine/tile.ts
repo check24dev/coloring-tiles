@@ -3,8 +3,8 @@ export default class Tile {
   xCor: number;
   yCor: number;
   visited: boolean;
-  constructor(color: string) {
-    this.color = color;
+  constructor(tileColor) {
+    this.color = tileColor;
     this.xCor = -1;
     this.yCor = -1;
     this.visited = false;
