@@ -4,6 +4,7 @@ import colorArray from './colorsUtile';
 import GameBoard from './gameEngine/board';
 import AStarAlgo from './gameEngine/aStarAlgo';
 import BacktrackAlgo from './gameEngine/backtrackAlgo';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class GameService {
@@ -14,8 +15,8 @@ export class GameService {
   startBoard: GameBoard;
   humanMoves = [];
   aStarAlgo: AStarAlgo;
-  backtrack: BacktrackAlgo;
-  constructor() { }
+  backtrackAlgo: BacktrackAlgo;
+  constructor(public snackBar: MatSnackBar) { }
   initColorPanel(): void {
     this.colorsPanel = [];
     for (let i = 0; i < this.colorsNumber; i++) {
@@ -33,7 +34,10 @@ export class GameService {
     this.startBoard.init();
     this.initColorPanel();
     this.aStarAlgo = new AStarAlgo();
-    this.backtrack = new BacktrackAlgo();
+    this.backtrackAlgo = new BacktrackAlgo();
+    this.humanMoves = [];
+    this.humanMoves.push(this.startBoard);
+    this.isColorPanelDisabled = false;
   }
   panelColorClicked(color: string): void {
     let tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
@@ -46,12 +50,15 @@ export class GameService {
     this.humanMoves.push(tempBoard);
     if (tempBoard.isFullyColored() === true) {
       this.isColorPanelDisabled = true;
+      this.snackBar.open(' !!لجين', 'برافو', {
+        duration: 4000,
+      });
     }
   }
   solveAStarClicked(): void {
     this.aStarAlgo.solve(this.startBoard, this.colorsPanel);
   }
   solveBackTrackClicked(): void {
-    this.backtrack.solve(this.startBoard, this.colorsPanel);
+    this.backtrackAlgo.solve(this.startBoard, this.colorsPanel);
   }
 }

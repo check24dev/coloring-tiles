@@ -1,10 +1,5 @@
-<!-- <input [(ngModel)]="boardDim" type="text" placeholder="enter board dimention" required>
-<input [(ngModel)]="colorsNumber" type="text" placeholder=" enter colors number" required>
-<button (click)="initBoardHandler()">Initialize Board</button>
-<button (click)="solveAStarHandler()">Solve Astar</button>
-<button (click)="solveBackTrackHandler()">Solve Backtarck</button> -->
 <div class="boardControl">
-  <div>
+  <!-- <div>
     <mat-form-field>
       <mat-select placeholder="Board Dimension" [(value)]="gameService.boardDim" (change)="gameService.initGame()">
         <mat-option *ngFor="let dimensionOp of dimensionOps" [value]="dimensionOp.value">
@@ -19,9 +14,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
+  </div> -->
   <div>
-    <button mat-raised-button color="primary" (click)="gameService.solveAStarClicked()">A Star</button>
-    <button mat-raised-button color="primary" (click)="gameService.solveBackTrackClicked()">BackTrack</button>
+    <button mat-raised-button color="primary" (click)="gameService.solveAStarClicked()">Computer Solve</button>
+    <button mat-raised-button (click)="gameService.initGame()">Reset</button>
+    <!-- <button mat-raised-button color="primary" (click)="gameService.solveBackTrackClicked()">BackTrack</button> -->
   </div>
 </div>

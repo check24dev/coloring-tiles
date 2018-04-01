@@ -1,0 +1,9 @@
+.colorsPanel{
+    max-width: 400px;
+    margin: 16px auto;
+}
+.colorsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

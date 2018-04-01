@@ -1,10 +1,12 @@
-<div class="colorsPanel">
-  <button mat-fab 
-    class="colorElem" 
-    *ngFor="let color of gameService.colorsPanel" 
-    (click)="gameService.panelColorClicked(color)" 
-    [ngStyle]="setBackgroundColor(color)"
-    [attr.disabled]="gameService.isColorPanelDisabled ? 'disabled' : null"
-  >
-  </button>
-</div>
+<mat-card class="colorsPanel">
+  <mat-card-header>
+    <!-- <mat-card-title>Start by choosing any color</mat-card-title> -->
+  </mat-card-header>
+  <mat-card-content>
+    <div class="colorsContainer">
+      <button mat-fab class="colorElem" *ngFor="let color of gameService.colorsPanel" (click)="gameService.panelColorClicked(color)"
+        [ngStyle]="setBackgroundColor(color)" [attr.disabled]="gameService.isColorPanelDisabled ? 'disabled' : null">
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

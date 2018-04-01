@@ -8,7 +8,7 @@ import Tile from '../gameEngine/tile';
 export class TileComponent implements OnInit {
   @Input() tile: Tile;
   @Input() isSourceTile: boolean;
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
   }
@@ -16,17 +16,9 @@ export class TileComponent implements OnInit {
     console.log(this.tile);
   }
   setTileBackground(): object {
-    let styles;
-    if (this.isSourceTile) {
-      styles = {
-        'background-color': this.tile.color,
-        'border': '#000 1px solid',
-      };
-    } else {
-      styles = {
-        'background-color': this.tile.color,
-      };
-    }
+    const styles = {
+      'background-color': this.tile.color,
+    };
     return styles;
   }
   renderTile(): string {

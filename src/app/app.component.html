@@ -1,21 +1,23 @@
 <div style="text-align:center">
-  <h1>
-    {{ title }}
-  </h1>
   <app-board-control></app-board-control>
   <app-color-panel></app-color-panel>
- 
-  <div class="statrBoard">
-    <app-board class="boardContainer" [gameBoard]="gameService.startBoard"></app-board>
+
+  <mat-card class="statrBoard">
+    <mat-card-content>
+      <!-- <app-board class="boardContainer" [gameBoard]="gameService.startBoard"></app-board> -->
+      <app-board [gameBoard]="gameService.humanMoves[gameService.humanMoves.length - 1]"></app-board>
+    </mat-card-content>
+  </mat-card>
+  <!-- <div class="boards">
+    <app-board class="boardContainer" *ngFor="let board of gameService.humanMoves" [gameBoard]="board"></app-board>
+  </div> -->
+  <!-- <div class="solution" *ngIf="gameService.humanMoves.length">
+    <app-game-solution [solution]="gameService.humanMoves[gameService.humanMoves.length - 1]"></app-game-solution>
+  </div> -->
+  <div class="solution" *ngIf="gameService.aStarAlgo.solution.length">
+    <app-game-solution [solution]="gameService.aStarAlgo.solution"></app-game-solution>
   </div>
-  <div class="boards">
-    <app-board class="boardContainer" *ngFor="let board of gameService.humanMoves " [gameBoard]="board"></app-board>
+  <div class="solution" *ngIf="gameService.backtrackAlgo.solution.length">
+    <app-game-solution [solution]="gameService.backtrackAlgo.solution"></app-game-solution>
   </div>
-  <div class="boards">
-    <app-board class="boardContainer" *ngFor="let board of gameService.aStarAlgo.solution" [gameBoard]="board"></app-board>
-  </div>
-  <div class="boards">
-    <app-board class="boardContainer" *ngFor="let board of  gameService.backtrack.solution" [gameBoard]="board"></app-board>
-  </div>
-  <app-game-solution></app-game-solution>
 </div>

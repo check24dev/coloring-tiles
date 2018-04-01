@@ -8,6 +8,7 @@
 .boardContainer{
   margin: 24px;
 }
-.full{
-  width: 100%;
+.statrBoard{
+  max-width: 400px;
+  margin: 0 auto;
 }

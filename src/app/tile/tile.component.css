@@ -2,8 +2,27 @@
   /* border: 1px solid #000; */
   color: #fff;
   padding: 16px;
-  margin: 1px;
+  width: 28px;
+  height: 28px;
+  margin: 2px;
 }
 .tile:hover{
   cursor: pointer;
+}
+.tile_source{
+  border-radius: 50%;
+  box-shadow: 0px 0px 8px 8px rgba(0,0,0,0.8);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0,0,0,0.8);
+  }
+  70% {
+    box-shadow: 0 0 10px 10px rgba(0,0,0,0.4);
+  }
+  100% {
+     box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  }
 }

@@ -1,26 +1,9 @@
 <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
-  <mat-step>
-    <ng-template matStepLabel>Fill out your name</ng-template>
-    first
+  <mat-step *ngFor="let board of solution">
+    <app-board class="boardContainer" [gameBoard]="board"></app-board>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Fill out your name</ng-template>
-    second
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
