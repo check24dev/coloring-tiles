@@ -3,11 +3,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-<<<<<<< HEAD
   overflow-x: scroll;
-=======
-  border: #000 1px solid;
->>>>>>> 5065560e6aa91aa6c02a98a168c0352eb2b343a2
 }
 .boardContainer{
   margin: 24px;
