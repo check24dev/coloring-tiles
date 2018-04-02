@@ -4,6 +4,7 @@ import colorArray from './colorsUtile';
 import GameBoard from './gameEngine/board';
 import AStarAlgo from './gameEngine/aStarAlgo';
 import BacktrackAlgo from './gameEngine/backtrackAlgo';
+import AmmarAlgo from './gameEngine/ammarAlgo';
 
 @Injectable()
 export class GameService {
@@ -15,6 +16,7 @@ export class GameService {
   humanMoves = [];
   aStarAlgo: AStarAlgo;
   backtrack: BacktrackAlgo;
+  ammarAlgo: AmmarAlgo;
   constructor() { }
   initColorPanel(): void {
     this.colorsPanel = [];
@@ -34,6 +36,7 @@ export class GameService {
     this.initColorPanel();
     this.aStarAlgo = new AStarAlgo();
     this.backtrack = new BacktrackAlgo();
+     this.ammarAlgo = new AmmarAlgo();
   }
   panelColorClicked(color: string): void {
     let tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
@@ -53,5 +56,8 @@ export class GameService {
   }
   solveBackTrackClicked(): void {
     this.backtrack.solve(this.startBoard, this.colorsPanel);
+  }
+  solveAmmarAlgoClicked(): void {
+    this.ammarAlgo.solve(this.startBoard, this.colorsPanel);
   }
 }
