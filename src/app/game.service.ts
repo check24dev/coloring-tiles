@@ -16,7 +16,7 @@ export class GameService {
   humanMoves = [];
   aStarAlgo: AStarAlgo;
   backtrack: BacktrackAlgo;
-  ammarColorOrdered: AmmarAlgo;
+  ammarAlgo: AmmarAlgo;
   constructor() { }
   initColorPanel(): void {
     this.colorsPanel = [];
@@ -36,7 +36,7 @@ export class GameService {
     this.initColorPanel();
     this.aStarAlgo = new AStarAlgo();
     this.backtrack = new BacktrackAlgo();
-     this.ammarColorOrdered = new AmmarAlgo();
+     this.ammarAlgo = new AmmarAlgo();
   }
   panelColorClicked(color: string): void {
     let tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
@@ -58,7 +58,6 @@ export class GameService {
     this.backtrack.solve(this.startBoard, this.colorsPanel);
   }
   solveAmmarAlgoClicked(): void {
-    this.ammarColorOrdered.solve(this.startBoard, this.colorsPanel);
+    this.ammarAlgo.solve(this.startBoard, this.colorsPanel);
   }
-  
 }
