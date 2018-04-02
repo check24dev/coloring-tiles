@@ -36,7 +36,7 @@ export class GameService {
     this.initColorPanel();
     this.aStarAlgo = new AStarAlgo();
     this.backtrack = new BacktrackAlgo();
-    this.ammarColorOrdered = new AmmarAlgo();
+     this.ammarColorOrdered = new AmmarAlgo();
   }
   panelColorClicked(color: string): void {
     let tempBoard = new GameBoard(this.boardDim, this.colorsNumber);
@@ -51,13 +51,13 @@ export class GameService {
       this.isColorPanelDisabled = true;
     }
   }
-  solveAStarClicked1(): void {
+  solveAStarClicked(): void {
     this.aStarAlgo.solve(this.startBoard, this.colorsPanel);
   }
   solveBackTrackClicked(): void {
     this.backtrack.solve(this.startBoard, this.colorsPanel);
   }
-  solveAStarClicked(): void {
+  solveAmmarAlgoClicked(): void {
     this.ammarColorOrdered.solve(this.startBoard, this.colorsPanel);
   }
   

@@ -17,5 +17,7 @@
   <div class="boards">
     <app-board class="boardContainer" *ngFor="let board of  gameService.backtrack.solution" [gameBoard]="board"></app-board>
   </div>
-  <app-game-solution></app-game-solution>
+  <div class="boards">
+    <app-board class="boardContainer" *ngFor="let board of gameService.ammarColorOrdered.solution" [gameBoard]="board"></app-board>
+  </div>
 </div>
